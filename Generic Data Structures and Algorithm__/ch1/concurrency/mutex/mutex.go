@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
@@ -11,6 +12,9 @@ var countValue int
 var m sync.Mutex
 
 func main() {
+	runtime.GOMAXPROCS(12)
+
+	fmt.Printf("Number of cores %d", runtime.NumCPU())
 	var wg sync.WaitGroup
 	wg.Add(number)
 
@@ -25,4 +29,6 @@ func main() {
 
 	wg.Wait()
 	fmt.Printf("\ncountValue = %d", countValue)
+	fmt.Printf("Number of cores %d", runtime.NumCPU())
+
 }
