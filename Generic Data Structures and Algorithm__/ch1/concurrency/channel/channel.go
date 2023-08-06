@@ -25,7 +25,8 @@ func output(c chan string) {
 }
 
 func main() {
-	c := make(chan string)
+	var c chan string
+	c = make(chan string)
 	wg.Add(2)
 	go pingGenerator(c)
 	go output(c)

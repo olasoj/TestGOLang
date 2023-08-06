@@ -8,7 +8,7 @@ import (
 
 func (app *application) routes() *httprouter.Router {
 
-	// Initialize a new httprouter router instance.
+	// Initialize a new http-router router instance.
 	router := httprouter.New()
 
 	// Convert the notFoundResponse() helper to a http.Handler using the
@@ -25,6 +25,8 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthcheckHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/movies", app.createMovieHandler)
 	router.HandlerFunc(http.MethodGet, "/v1/movies/:id", app.showMovieHandler)
-	// Return the httprouter instance.
+	router.HandlerFunc(http.MethodPut, "/v1/movies/:id", app.updateMovieHandler)
+	router.HandlerFunc(http.MethodDelete, "/v1/movies/:id", app.deleteMovieHandler)
+	// Return the http-router instance.
 	return router
 }
